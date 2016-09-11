@@ -35,7 +35,6 @@ class MainVindow(QtWidgets.QMainWindow):
         exitt = QtWidgets.QAction("Exit", self)
         exitt.setShortcut('Ctrl+Q')
         exitt.setStatusTip("Exit browser")
-        #self.connect(exitt, QtCore.PYQT_SIGNAL("triggered()"), QtCore.PYQT_SLOT("close()"))
         exitt.triggered.connect(lambda: self.close())
 
         about = QtWidgets.QAction("About", self)
@@ -61,13 +60,11 @@ class MainVindow(QtWidgets.QMainWindow):
         horLayout = QtWidgets.QHBoxLayout(mod_window)
         localHtmls = QtWebEngineWidgets.QWebEngineView()
 
-        #localHtmls.page().acceptNavigationRequest(QtCore.QUrl())
-        #localHtmls.page().load(QtCore.QUrl("file://about.html"))
         localHtmls.load(QtCore.QUrl("Html/about.html"))
 
         horLayout.addWidget(localHtmls)
-        #localHtmls.linkClicked.connect(self.clicks)
         mod_window.show()
+
     def clicks(self, url):
         self.widgett.addTabb(url)
 
@@ -154,7 +151,6 @@ class TabWidget(QtWidgets.QTabWidget):
 
         def iconCangedd(icon):
             i = self.indexOf(web.parent())
-            print('url', icon)
             self.setTabIcon(i, icon)
         def linkChanged(link):
             try:
@@ -176,9 +172,6 @@ class TabWidget(QtWidgets.QTabWidget):
                 self.this.progr.setValue(set)
                 self.this.progr.setVisible(True)
             else:
-                self.this.progr.setVisible(False)
-        def loadProgressEnd(set):
-            if set:
                 self.this.progr.setVisible(False)
         def indexChanged(ind):
             text = self.tabText(ind)
